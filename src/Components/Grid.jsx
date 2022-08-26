@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Box, GridItem, Flex } from "@chakra-ui/react";
+import { Grid, Box, Flex } from "@chakra-ui/react";
 
 function GridContainer() {
   const answerGrid = [
@@ -26,7 +26,7 @@ function GridContainer() {
                     alignContent={"center"}
                     textAlign={"center"}
                     fontSize={"32px"}
-                    fontWeight={"bold"}
+                    fontWeight={"extrabold"}
                     border={"2px solid #D3D6DA"}
                     paddingTop={"3px"}
                   >
