@@ -179,7 +179,7 @@ function Header() {
                 <Highlight query={"E"} styles={{ fontWeight: "extrabold" }}>
                   E
                 </Highlight>{" "}
-                is not in the word in any spot.
+                is not in the colour in any spot.
               </Text>
               <Text
                 fontWeight={"extrabold"}
