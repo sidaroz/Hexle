@@ -14,20 +14,21 @@ function GridContainer() {
 
   return (
     <>
-      <Grid width={"25%"} height={"55vh"} paddingTop={"2.3rem"}>
+      <Grid height={"60vh"} paddingTop={"2.3rem"} margin={"0 auto"}>
         {answerGrid.map((row) => {
           return (
             <Flex alignItems={"center"} justify={"center"} gap={"6px"}>
               {row.map((letter) => {
                 return (
                   <Box
-                    width={"3.5rem"}
-                    height={"3.5rem"}
+                    width={"3.9rem"}
+                    height={"3.9rem"}
                     alignContent={"center"}
                     textAlign={"center"}
-                    fontSize={"36px"}
-                    fontWeight={"extrabold"}
+                    fontSize={"32px"}
+                    fontWeight={"bold"}
                     border={"2px solid #D3D6DA"}
+                    paddingTop={"3px"}
                   >
                     {letter}
                   </Box>
