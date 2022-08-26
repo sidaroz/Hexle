@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Box, Button } from "@chakra-ui/react";
+import { FiDelete } from "react-icons/fi";
 
 function Keyboard() {
   const keysRequired = [
@@ -15,17 +16,21 @@ function Keyboard() {
     "3",
     "4",
     "5",
-    "Del",
+    "Enter",
     "6",
     "7",
     "8",
     "9",
-    "Enter",
+    <FiDelete />,
   ];
   return (
     <Grid gridTemplateColumns={"repeat(6, 1fr)"} gap={1} paddingTop={"10px"}>
       {keysRequired.map((key) => {
-        return <Button>{key}</Button>;
+        return (
+          <Button backgroundColor={"#D3D6DA"} padding={"1.8rem 0.1rem"}>
+            {key}
+          </Button>
+        );
       })}
     </Grid>
   );
