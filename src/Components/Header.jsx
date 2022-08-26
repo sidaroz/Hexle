@@ -19,10 +19,10 @@ function Header() {
         borderBottom={"1px solid grey"}
         padding={"6px 0"}
       >
-        <Heading as={"h1"} size={"xl"} margin={"0 auto"} paddingLeft={"4%"}>
+        <Heading as={"h1"} size={"xl"} margin={"0 auto"} paddingLeft={"5.5%"}>
           Hexle
         </Heading>
-        <Flex>
+        <Flex paddingRight={"1rem"}>
           <Box as="button">
             <AiOutlineQuestionCircle size={"2em"} />
           </Box>
