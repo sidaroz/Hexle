@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, Box, Flex } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { boardState } from "../state/board";
@@ -9,12 +9,13 @@ function GridContainer() {
   return (
     <>
       <Grid height={"60vh"} paddingTop={"2.3rem"} margin={"0 auto"}>
-        {board.map((row) => {
+        {board.map((row, i) => {
           return (
-            <Flex alignItems={"center"} justify={"center"} gap={"6px"}>
-              {row.map((letter) => {
+            <Flex key={i} alignItems={"center"} justify={"center"} gap={"6px"}>
+              {row.map((letter, i) => {
                 return (
                   <Box
+                    key={i}
                     display={"flex"}
                     width={"3.9rem"}
                     height={"3.9rem"}

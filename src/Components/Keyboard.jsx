@@ -10,31 +10,41 @@ function Keyboard() {
     attempt: 0,
     letterPosition: 0,
   });
+  const onEnterFunc = function () {
+    if (currAttempt.letterPosition !== 6) return;
+    setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPosition: 0 });
+  };
 
+  const onDeleteFunc = function () {
+    if (currAttempt.letterPosition === 0) return;
+    const newBoard = board.map((row) => [...row]);
+    newBoard[currAttempt.attempt][currAttempt.letterPosition - 1] = "";
+    setBoard(newBoard);
+    setCurrAttempt({
+      ...currAttempt,
+      letterPosition: currAttempt.letterPosition - 1,
+    });
+  };
+
+  const onKeyDownFunc = function (key) {
+    if (currAttempt.letterPosition > 5) return;
+    const newBoard = board.map((row) => [...row]);
+    newBoard[currAttempt.attempt][currAttempt.letterPosition] = key;
+    setBoard(newBoard);
+    setCurrAttempt({
+      ...currAttempt,
+      letterPosition: currAttempt.letterPosition + 1,
+    });
+  };
   const handleKeyboard = useCallback((e) => {
     if (e.key === "Enter") {
-      if (currAttempt.letterPosition !== 6) return;
-      setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPosition: 0 });
+      onEnterFunc();
     } else if (e.key === "Backspace") {
-      if (currAttempt.letterPosition === 0) return;
-      const newBoard = board.map((row) => [...row]);
-      newBoard[currAttempt.attempt][currAttempt.letterPosition - 1] = "";
-      setBoard(newBoard);
-      setCurrAttempt({
-        ...currAttempt,
-        letterPosition: currAttempt.letterPosition - 1,
-      });
+      onDeleteFunc();
     } else {
       keysRequired.forEach((key) => {
-        if (e.key === key.toLowerCase()) {
-          if (currAttempt.letterPosition > 5) return;
-          const newBoard = board.map((row) => [...row]);
-          newBoard[currAttempt.attempt][currAttempt.letterPosition] = key;
-          setBoard(newBoard);
-          setCurrAttempt({
-            ...currAttempt,
-            letterPosition: currAttempt.letterPosition + 1,
-          });
+        if (e.key.toUpperCase() === key) {
+          onKeyDownFunc(key);
         }
       });
     }
@@ -107,6 +117,7 @@ function Keyboard() {
       {keysRequired.map((key, i) => {
         return (
           <Button
+            key={i}
             id={`key-${i}`}
             backgroundColor={"#D3D6DA"}
             padding={"1.8rem 0.3rem"}

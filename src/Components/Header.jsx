@@ -25,7 +25,7 @@ function Header() {
   const randomColourThree = "0F111E";
   useEffect(() => {
     onOpen();
-  }, []);
+  }, [onOpen]);
 
   return (
     <>
@@ -92,9 +92,10 @@ function Header() {
                 Examples
               </Text>
               <Flex gap={1} marginTop={"10px"}>
-                {randomColour.split("").map((letter) => {
+                {randomColour.split("").map((letter, i) => {
                   return (
                     <Box
+                      key={i}
                       display={"flex"}
                       alignItems={"center"}
                       justifyContent={"center"}
@@ -118,9 +119,10 @@ function Header() {
                 </Highlight>
               </Text>
               <Flex gap={1} marginTop={"10px"}>
-                {randomColourTwo.split("").map((letter) => {
+                {randomColourTwo.split("").map((letter, i) => {
                   return (
                     <Box
+                      key={i}
                       display={"flex"}
                       alignItems={"center"}
                       justifyContent={"center"}
@@ -146,9 +148,10 @@ function Header() {
                 is in the colour but in the wrong spot.
               </Text>
               <Flex gap={1} marginTop={"10px"}>
-                {randomColourThree.split("").map((letter) => {
+                {randomColourThree.split("").map((letter, i) => {
                   return (
                     <Box
+                      key={i}
                       display={"flex"}
                       alignItems={"center"}
                       justifyContent={"center"}
