@@ -21,14 +21,14 @@ function GridContainer() {
               {row.map((letter) => {
                 return (
                   <Box
+                    display={"flex"}
                     width={"3.9rem"}
                     height={"3.9rem"}
-                    alignContent={"center"}
-                    textAlign={"center"}
+                    alignItems={"center"}
+                    justifyContent={"center"}
                     fontSize={"32px"}
                     fontWeight={"extrabold"}
                     border={"2px solid #D3D6DA"}
-                    paddingTop={"3px"}
                   >
                     {letter}
                   </Box>
