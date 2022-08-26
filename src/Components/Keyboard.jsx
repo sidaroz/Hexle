@@ -2,14 +2,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Grid, Button } from "@chakra-ui/react";
 import { FiDelete } from "react-icons/fi";
 import { useRecoilState } from "recoil";
-import { boardState } from "../state/board";
+import { boardState, currAttemptState } from "../state/board";
 
 function Keyboard() {
   const [board, setBoard] = useRecoilState(boardState);
-  const [currAttempt, setCurrAttempt] = useState({
-    attempt: 0,
-    letterPosition: 0,
-  });
+  const [currAttempt, setCurrAttempt] = useRecoilState(currAttemptState);
+
   const onEnterFunc = function () {
     if (currAttempt.letterPosition !== 6) return;
     setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPosition: 0 });
@@ -61,28 +59,12 @@ function Keyboard() {
   const keyHandler = (e) => {
     if (e.target.textContent === "Enter") {
       // If not full then return whatever needed
-      if (currAttempt.letterPosition !== 6) return;
-      setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPosition: 0 });
+      onEnterFunc();
     } else if (e.target.textContent === "") {
-      if (currAttempt.letterPosition === 0) return;
-      const newBoard = board.map((row) => [...row]);
-      newBoard[currAttempt.attempt][currAttempt.letterPosition - 1] = "";
-      setBoard(newBoard);
-      setCurrAttempt({
-        ...currAttempt,
-        letterPosition: currAttempt.letterPosition - 1,
-      });
+      onDeleteFunc();
     } else {
       // Fills in the slots
-      if (currAttempt.letterPosition > 5) return;
-      const newBoard = board.map((row) => [...row]);
-      newBoard[currAttempt.attempt][currAttempt.letterPosition] =
-        e.target.textContent;
-      setBoard(newBoard);
-      setCurrAttempt({
-        ...currAttempt,
-        letterPosition: currAttempt.letterPosition + 1,
-      });
+      onKeyDownFunc(e.target.textContent);
     }
   };
 

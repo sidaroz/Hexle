@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Box, Flex } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { boardState } from "../state/board";
+import { correctColour } from "../const";
 
 function GridContainer() {
   const board = useRecoilValue(boardState);
