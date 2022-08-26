@@ -24,10 +24,20 @@ function Keyboard() {
     <FiDelete />,
   ];
   return (
-    <Grid gridTemplateColumns={"repeat(6, 1fr)"} gap={1} paddingTop={"10px"}>
-      {keysRequired.map((key) => {
+    <Grid
+      gridTemplateRows={"repeat(3, 1fr)"}
+      gridTemplateColumns={"repeat(6, 1fr)"}
+      gap={1}
+      paddingTop={"10px"}
+    >
+      {keysRequired.map((key, i) => {
+        console.log(key);
         return (
-          <Button backgroundColor={"#D3D6DA"} padding={"1.8rem 0.1rem"}>
+          <Button
+            id={`key-${i}`}
+            backgroundColor={"#D3D6DA"}
+            padding={"1.8rem 0.3rem"}
+          >
             {key}
           </Button>
         );
