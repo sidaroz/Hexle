@@ -31,7 +31,6 @@ function Keyboard() {
       paddingTop={"10px"}
     >
       {keysRequired.map((key, i) => {
-        console.log(key);
         return (
           <Button
             id={`key-${i}`}
