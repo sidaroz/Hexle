@@ -7,7 +7,15 @@ function Header() {
   return (
     <>
       <Flex width={"100%"} borderBottom={"1px solid grey"} padding={"6px 0"}>
-        <Heading as={"h1"} size={"xl"} margin={"0 auto"}>
+        <Heading
+          as={"h1"}
+          size={"xl"}
+          margin={"0 auto"}
+          bgGradient={
+            "linear(to-r,  red.300, yellow.300, blue.600, purple.500)"
+          }
+          bgClip={"text"}
+        >
           Hexle
         </Heading>
         <Flex
