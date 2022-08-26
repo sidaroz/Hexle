@@ -75,7 +75,7 @@ function Header() {
                 </Highlight>
               </Text>
               <Text noOfLines={1} fontSize={"14px"} marginBottom={"10px"}>
-                Each guess must be a valid 5-letter word. Hit the enter button
+                Each guess must be a valid Hex colour code. Hit the enter button
                 to submit.
               </Text>
               <Text

@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import { Grid, Box, Flex } from "@chakra-ui/react";
+import { useRecoilValue } from "recoil";
+import { boardState } from "../state/board";
 
 function GridContainer() {
-  const answerGrid = [
-    ["R", "a", "a", "a", "a", "a"],
-    ["a", "a", "a", "a", "a", "a"],
-    ["a", "a", "a", "a", "a", "a"],
-    ["a", "a", "a", "a", "a", "a"],
-    ["a", "a", "a", "a", "a", "a"],
-    ["a", "a", "a", "a", "a", "a"],
-  ];
-  const [board, setBoard] = useState(answerGrid);
+  const board = useRecoilValue(boardState);
 
   return (
     <>
       <Grid height={"60vh"} paddingTop={"2.3rem"} margin={"0 auto"}>
-        {answerGrid.map((row) => {
+        {board.map((row) => {
           return (
             <Flex alignItems={"center"} justify={"center"} gap={"6px"}>
               {row.map((letter) => {
