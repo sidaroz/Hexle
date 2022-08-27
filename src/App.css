@@ -49,6 +49,21 @@
   }
 }
 
+@keyframes falling {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(32px);
+  }
+  100% {
+    transform: translateY(63px);
+  }
+}
+.fall {
+  animation: 0.2s linear falling;
+}
+
 .flip {
   animation: 0.5s linear flipping;
 }

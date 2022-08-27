@@ -11,7 +11,7 @@ function GridContainer() {
 
   return (
     <>
-      <Grid height={"60vh"} paddingTop={"2.3rem"} margin={"0 auto"}>
+      <Grid maxHeight={"60vh"} paddingTop={"2.3rem"} margin={"0 auto"}>
         {board.map((row, i) => {
           return (
             <>

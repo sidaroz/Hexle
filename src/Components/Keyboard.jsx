@@ -130,8 +130,13 @@ function Keyboard() {
     const previousRowHash = document.querySelector(
       `#hash-${currAttempt.attempt}`
     );
-    currentRowHash.classList.remove("hidden");
-    previousRowHash.classList.add("hidden");
+    if (currAttempt.attempt < 5) {
+      previousRowHash.classList.add("fall");
+      setTimeout(() => {
+        currentRowHash.classList.remove("hidden");
+        previousRowHash.classList.add("hidden");
+      }, 200);
+    }
   };
   useEffect(() => {
     const currentRowHash = document.querySelector(`#hash-${0}`);
