@@ -7,7 +7,7 @@ export const answerGrid = [
   ["", "", "", "", "", ""],
 ];
 
-export const correctColour = "F12AD2";
+export const correctColour = generateRandomColor();
 
 export const currAttempt = {
   attempt: 0,
@@ -15,3 +15,12 @@ export const currAttempt = {
 };
 
 export const gameOver = false;
+
+function generateRandomColor() {
+  const letters = "0123456789ABCDEF";
+  var color = "";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
