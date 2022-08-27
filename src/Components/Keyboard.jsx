@@ -85,7 +85,10 @@ function Keyboard() {
       onKeyDownFunc(e.target.textContent);
     }
   };
-
+  const addColourToKeyBoardKey = function (letter, style) {
+    const keyboardKey = document.querySelector(`#key-${letter}`);
+    keyboardKey.classList.add(style);
+  };
   const flipTileHandler = () => {
     const rowTiles = document.querySelector(
       `#guess__row-${currAttempt.attempt}`
@@ -97,9 +100,14 @@ function Keyboard() {
         tile.classList.add("flip");
         if (dataLetter === answerColour[index]) {
           tile.classList.add("correct");
+          addColourToKeyBoardKey(dataLetter, "correct");
         } else if (answerColour.includes(dataLetter)) {
           tile.classList.add("almost");
-        } else tile.classList.add("error");
+          addColourToKeyBoardKey(dataLetter, "almost");
+        } else {
+          tile.classList.add("error");
+          addColourToKeyBoardKey(dataLetter, "error");
+        }
       }, 500 * index);
     });
   };
@@ -136,7 +144,7 @@ function Keyboard() {
         return (
           <Button
             key={i}
-            id={`key-${i}`}
+            id={i === 17 ? "key-del" : `key-${key}`}
             backgroundColor={"#D3D6DA"}
             padding={"1.8rem 0.3rem"}
             onClick={keyHandler}

@@ -54,19 +54,19 @@
 }
 
 .error {
-  background-color: #787c7e;
+  background-color: #787c7e !important;
   color: white;
   border: none !important;
 }
 
 .almost {
-  background-color: #c8b458;
+  background-color: #c8b458 !important;
   color: white;
   border: none !important;
 }
 
 .correct {
-  background-color: #6aa964;
+  background-color: #6aa964 !important;
   color: white;
   border: none !important;
 }
