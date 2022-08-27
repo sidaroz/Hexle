@@ -21,7 +21,6 @@ function Keyboard() {
     if (currAttempt.letterPosition !== 6) return;
     flipTileHandler();
     if (answerColour === guess) {
-      alert("Well done");
       setGameOver(true);
     } else if (currAttempt.attempt >= 5) {
       setGameOver(true);
@@ -85,29 +84,43 @@ function Keyboard() {
       onKeyDownFunc(e.target.textContent);
     }
   };
+
   const addColourToKeyBoardKey = function (letter, style) {
     const keyboardKey = document.querySelector(`#key-${letter}`);
     keyboardKey.classList.add(style);
   };
+
   const flipTileHandler = () => {
     const rowTiles = document.querySelector(
       `#guess__row-${currAttempt.attempt}`
     ).childNodes;
-    rowTiles.forEach((tile, index) => {
-      const dataLetter = tile.textContent;
+    let checkHexle = correctColour;
+    const guess = [];
 
+    rowTiles.forEach((tile) => {
+      guess.push({ letter: tile.textContent, colour: "error" });
+    });
+
+    guess.forEach((guessLetter, index) => {
+      if (guessLetter.letter === correctColour[index]) {
+        guessLetter.colour = "correct";
+        checkHexle = checkHexle.replace(guessLetter.letter, "");
+      }
+    });
+
+    guess.forEach((guessLetter) => {
+      if (checkHexle.includes(guessLetter.letter)) {
+        guessLetter.colour = "almost";
+        checkHexle = checkHexle.replace(guessLetter.letter, "");
+        return;
+      }
+    });
+
+    rowTiles.forEach((tile, index) => {
       setTimeout(() => {
         tile.classList.add("flip");
-        if (dataLetter === answerColour[index]) {
-          tile.classList.add("correct");
-          addColourToKeyBoardKey(dataLetter, "correct");
-        } else if (answerColour.includes(dataLetter)) {
-          tile.classList.add("almost");
-          addColourToKeyBoardKey(dataLetter, "almost");
-        } else {
-          tile.classList.add("error");
-          addColourToKeyBoardKey(dataLetter, "error");
-        }
+        tile.classList.add(guess[index].colour);
+        addColourToKeyBoardKey(guess[index].letter, guess[index].colour);
       }, 500 * index);
     });
   };
