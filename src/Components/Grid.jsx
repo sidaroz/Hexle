@@ -15,7 +15,12 @@ function GridContainer() {
         {board.map((row, i) => {
           return (
             <>
-              <Flex alignItems={"center"} justify={"center"}>
+              <Flex
+                alignItems={"center"}
+                justify={"center"}
+                position={"relative"}
+                left={"-10px"}
+              >
                 <Box
                   id={`hash-${i}`}
                   fontSize={"44px"}

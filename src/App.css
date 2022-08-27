@@ -72,5 +72,5 @@
 }
 
 .hidden {
-  display: none;
+  background-color: transparent !important;
 }
