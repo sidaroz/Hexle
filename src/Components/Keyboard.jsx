@@ -2,12 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Grid, Button } from "@chakra-ui/react";
 import { FiDelete } from "react-icons/fi";
 import { useRecoilState } from "recoil";
-import {
-  boardState,
-  currAttemptState,
-  bgColourState,
-  gameOverState,
-} from "../state/board";
+import { boardState, currAttemptState, gameOverState } from "../state/board";
 import { correctColour } from "../const";
 
 function Keyboard() {
@@ -22,6 +17,7 @@ function Keyboard() {
     flipTileHandler();
     if (answerColour === guess) {
       setGameOver(true);
+      return;
     } else if (currAttempt.attempt >= 5) {
       setGameOver(true);
       return alert("You lost");
