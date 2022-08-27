@@ -93,11 +93,14 @@ function Keyboard() {
     rowTiles.forEach((tile, index) => {
       const dataLetter = tile.textContent;
 
-      if (dataLetter === answerColour[index]) {
-        tile.classList.add("correct");
-      } else if (answerColour.includes(dataLetter)) {
-        tile.classList.add("almost");
-      } else tile.classList.add("error");
+      setTimeout(() => {
+        tile.classList.add("flip");
+        if (dataLetter === answerColour[index]) {
+          tile.classList.add("correct");
+        } else if (answerColour.includes(dataLetter)) {
+          tile.classList.add("almost");
+        } else tile.classList.add("error");
+      }, 500 * index);
     });
   };
 
