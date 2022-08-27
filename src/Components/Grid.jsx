@@ -15,7 +15,7 @@ function GridContainer() {
         {board.map((row, i) => {
           return (
             <>
-              <Flex>
+              <Flex alignItems={"center"} justify={"center"}>
                 <Box
                   id={`hash-${i}`}
                   fontSize={"44px"}
@@ -24,7 +24,7 @@ function GridContainer() {
                   left={"-10px"}
                   bgColor={`#${correctColour}`}
                   bgClip={"text"}
-                  display={"none"}
+                  className={"hidden"}
                 >
                   #
                 </Box>

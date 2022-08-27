@@ -15,6 +15,7 @@ function Keyboard() {
     const guess = board[currAttempt.attempt].join("");
     if (currAttempt.letterPosition !== 6) return;
     flipTileHandler();
+    hashHandler();
     document.body.style.backgroundColor = `#${guess}`;
     if (answerColour === guess) {
       setGameOver(true);
@@ -122,6 +123,20 @@ function Keyboard() {
     });
   };
 
+  const hashHandler = function () {
+    const currentRowHash = document.querySelector(
+      `#hash-${currAttempt.attempt + 1}`
+    );
+    const previousRowHash = document.querySelector(
+      `#hash-${currAttempt.attempt}`
+    );
+    currentRowHash.classList.remove("hidden");
+    previousRowHash.classList.add("hidden");
+  };
+  useEffect(() => {
+    const currentRowHash = document.querySelector(`#hash-${0}`);
+    currentRowHash.classList.remove("hidden");
+  }, []);
   const keysRequired = [
     "A",
     "B",
