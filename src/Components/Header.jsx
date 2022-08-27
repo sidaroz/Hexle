@@ -29,7 +29,7 @@ function Header() {
 
   return (
     <>
-      <Flex width={"100%"} borderBottom={"1px solid grey"} padding={"6px 0"}>
+      <Flex width={"100%"} padding={"6px 0"}>
         <Heading
           as={"h1"}
           size={"xl"}

@@ -17,12 +17,14 @@ function GridContainer() {
             <>
               <Flex>
                 <Box
+                  id={`hash-${i}`}
                   fontSize={"44px"}
                   fontWeight={"extrabold"}
                   position={"relative"}
                   left={"-10px"}
                   bgColor={`#${correctColour}`}
                   bgClip={"text"}
+                  display={"none"}
                 >
                   #
                 </Box>

@@ -15,6 +15,7 @@ function Keyboard() {
     const guess = board[currAttempt.attempt].join("");
     if (currAttempt.letterPosition !== 6) return;
     flipTileHandler();
+    document.body.style.backgroundColor = `#${guess}`;
     if (answerColour === guess) {
       setGameOver(true);
       return;
