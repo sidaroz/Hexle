@@ -2,15 +2,33 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Grid, Button } from "@chakra-ui/react";
 import { FiDelete } from "react-icons/fi";
 import { useRecoilState } from "recoil";
-import { boardState, currAttemptState } from "../state/board";
+import {
+  boardState,
+  currAttemptState,
+  bgColourState,
+  gameOverState,
+} from "../state/board";
+import { correctColour } from "../const";
 
 function Keyboard() {
   const [board, setBoard] = useRecoilState(boardState);
   const [currAttempt, setCurrAttempt] = useRecoilState(currAttemptState);
+  const [gameOver, setGameOver] = useRecoilState(gameOverState);
+  const answerColour = correctColour;
 
   const onEnterFunc = function () {
+    const guess = board[currAttempt.attempt].join("");
     if (currAttempt.letterPosition !== 6) return;
+    flipTileHandler();
+    if (answerColour === guess) {
+      alert("Well done");
+      setGameOver(true);
+    } else if (currAttempt.attempt >= 5) {
+      setGameOver(true);
+      return alert("You lost");
+    }
     setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPosition: 0 });
+    // Functionality for showing colours goes in here
   };
 
   const onDeleteFunc = function () {
@@ -66,6 +84,21 @@ function Keyboard() {
       // Fills in the slots
       onKeyDownFunc(e.target.textContent);
     }
+  };
+
+  const flipTileHandler = () => {
+    const rowTiles = document.querySelector(
+      `#guess__row-${currAttempt.attempt}`
+    ).childNodes;
+    rowTiles.forEach((tile, index) => {
+      const dataLetter = tile.textContent;
+
+      if (dataLetter === answerColour[index]) {
+        tile.classList.add("correct");
+      } else if (answerColour.includes(dataLetter)) {
+        tile.classList.add("almost");
+      } else tile.classList.add("error");
+    });
   };
 
   const keysRequired = [

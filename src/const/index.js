@@ -13,3 +13,5 @@ export const currAttempt = {
   attempt: 0,
   letterPosition: 0,
 };
+
+export const gameOver = false;

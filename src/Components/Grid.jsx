@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Box, Flex } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { boardState } from "../state/board";
-import { correctColour } from "../const";
 
 function GridContainer() {
   const board = useRecoilValue(boardState);
@@ -12,7 +11,13 @@ function GridContainer() {
       <Grid height={"60vh"} paddingTop={"2.3rem"} margin={"0 auto"}>
         {board.map((row, i) => {
           return (
-            <Flex key={i} alignItems={"center"} justify={"center"} gap={"6px"}>
+            <Flex
+              key={i}
+              alignItems={"center"}
+              justify={"center"}
+              gap={"6px"}
+              id={`guess__row-${i}`}
+            >
               {row.map((letter, i) => {
                 return (
                   <Box
