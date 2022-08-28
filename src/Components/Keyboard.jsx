@@ -1,5 +1,19 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Grid, Button, useColorModeValue } from "@chakra-ui/react";
+import {
+  Grid,
+  Button,
+  useColorModeValue,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Text,
+  Flex,
+} from "@chakra-ui/react";
 import { FiDelete } from "react-icons/fi";
 import { useRecoilState } from "recoil";
 import { boardState, currAttemptState, gameOverState } from "../state/board";
@@ -11,6 +25,7 @@ function Keyboard() {
   const [gameOver, setGameOver] = useRecoilState(gameOverState);
   const answerColour = correctColour;
   const bg = useColorModeValue("#D3D6DA", "#808384");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const onEnterFunc = function () {
     const guess = board[currAttempt.attempt].join("");
@@ -23,11 +38,17 @@ function Keyboard() {
     document.body.style.backgroundColor = `#${guess}`;
     if (answerColour === guess) {
       previousRowHash.classList.add("hidden");
-      setGameOver(true);
+      setGameOver("WON");
+      setTimeout(() => {
+        onOpen();
+      }, 3000);
       return;
     } else if (currAttempt.attempt >= 5) {
-      setGameOver(true);
-      return alert("You lost");
+      setGameOver("LOST");
+      setTimeout(() => {
+        onOpen();
+      }, 3000);
+      return;
     }
     setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPosition: 0 });
     // Functionality for showing colours goes in here
@@ -147,6 +168,7 @@ function Keyboard() {
     const currentRowHash = document.querySelector(`#hash-${0}`);
     currentRowHash.classList.remove("hidden");
   }, []);
+
   const keysRequired = [
     "A",
     "B",
@@ -168,28 +190,68 @@ function Keyboard() {
     <FiDelete />,
   ];
   return (
-    <Grid
-      gridTemplateRows={"repeat(3, 1fr)"}
-      gridTemplateColumns={"repeat(6, 1fr)"}
-      gap={1}
-      paddingTop={"10px"}
-      onKeyDown={handleKeyboard}
-    >
-      {keysRequired.map((key, i) => {
-        return (
-          <Button
-            key={i}
-            id={i === 17 ? "key-del" : `key-${key}`}
-            backgroundColor={"#D3D6DA"}
-            padding={"1.8rem 0.3rem"}
-            onClick={keyHandler}
-            bg={`${bg} !important`}
-          >
-            {key}
-          </Button>
-        );
-      })}
-    </Grid>
+    <>
+      <Grid
+        gridTemplateRows={"repeat(3, 1fr)"}
+        gridTemplateColumns={"repeat(6, 1fr)"}
+        gap={1}
+        paddingTop={"10px"}
+        onKeyDown={handleKeyboard}
+      >
+        {keysRequired.map((key, i) => {
+          return (
+            <Button
+              key={i}
+              id={i === 17 ? "key-del" : `key-${key}`}
+              backgroundColor={"#D3D6DA"}
+              padding={"1.8rem 0.3rem"}
+              onClick={keyHandler}
+            >
+              {key}
+            </Button>
+          );
+        })}
+      </Grid>
+      <Modal
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+        motionPreset="slideInBottom"
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader fontSize={"80px"} textAlign={"center"}>
+            YOU {gameOver === "WON" ? "WIN!" : "LOSE"}
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text
+              bgColor={`#${correctColour}`}
+              bgClip={"text"}
+              textAlign={"center"}
+              fontSize={"60px"}
+              fontWeight={"bold"}
+            >
+              #{correctColour}
+            </Text>
+          </ModalBody>
+          <ModalFooter>
+            <Flex margin={"0 auto"} gap={4}>
+              <Button _hover={{ bgColor: `#${correctColour}`, color: "white" }}>
+                Share
+              </Button>
+              <Button
+                bgColor={"#6AA964"}
+                color={"white"}
+                _hover={{ bgColor: "green.500" }}
+              >
+                Play Again
+              </Button>
+            </Flex>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
 

@@ -14,7 +14,7 @@ export const currAttempt = {
   letterPosition: 0,
 };
 
-export const gameOver = false;
+export const gameOver = "";
 
 function generateRandomColor() {
   const letters = "0123456789ABCDEF";
