@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Grid, Button } from "@chakra-ui/react";
+import { Grid, Button, useColorModeValue } from "@chakra-ui/react";
 import { FiDelete } from "react-icons/fi";
 import { useRecoilState } from "recoil";
 import { boardState, currAttemptState, gameOverState } from "../state/board";
@@ -10,6 +10,7 @@ function Keyboard() {
   const [currAttempt, setCurrAttempt] = useRecoilState(currAttemptState);
   const [gameOver, setGameOver] = useRecoilState(gameOverState);
   const answerColour = correctColour;
+  const bg = useColorModeValue("#D3D6DA", "#808384");
 
   const onEnterFunc = function () {
     const guess = board[currAttempt.attempt].join("");
@@ -182,6 +183,7 @@ function Keyboard() {
             backgroundColor={"#D3D6DA"}
             padding={"1.8rem 0.3rem"}
             onClick={keyHandler}
+            bg={`${bg} !important`}
           >
             {key}
           </Button>
