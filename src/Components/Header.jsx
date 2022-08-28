@@ -14,6 +14,7 @@ import {
   Container,
   Text,
   Highlight,
+  useColorMode,
 } from "@chakra-ui/react";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { CgDarkMode } from "react-icons/cg";
@@ -23,6 +24,8 @@ function Header() {
   const randomColour = "B32D2F";
   const randomColourTwo = "2F44BC";
   const randomColourThree = "0F111E";
+  const { colorMode, toggleColorMode } = useColorMode();
+
   useEffect(() => {
     onOpen();
   }, [onOpen]);
@@ -38,6 +41,7 @@ function Header() {
             "linear(to-r,  red.300, yellow.300, blue.600, purple.500)"
           }
           bgClip={"text"}
+          className={"website__header"}
         >
           Hexle
         </Heading>
@@ -51,7 +55,7 @@ function Header() {
           <Box as="button">
             <AiOutlineQuestionCircle size={"2em"} onClick={onOpen} />
           </Box>
-          <Box as="button">
+          <Box as="button" onClick={toggleColorMode}>
             <CgDarkMode size={"2em"} />
           </Box>
         </Flex>
