@@ -13,11 +13,15 @@ function Keyboard() {
 
   const onEnterFunc = function () {
     const guess = board[currAttempt.attempt].join("");
+    const previousRowHash = document.querySelector(
+      `#hash-${currAttempt.attempt}`
+    );
     if (currAttempt.letterPosition !== 6) return;
     flipTileHandler();
     hashHandler();
     document.body.style.backgroundColor = `#${guess}`;
     if (answerColour === guess) {
+      previousRowHash.classList.add("hidden");
       setGameOver(true);
       return;
     } else if (currAttempt.attempt >= 5) {
@@ -155,7 +159,7 @@ function Keyboard() {
     "3",
     "4",
     "5",
-    "Enter",
+    "ENTER",
     "6",
     "7",
     "8",

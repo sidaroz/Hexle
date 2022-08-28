@@ -19,7 +19,7 @@ function GridContainer() {
                 alignItems={"center"}
                 justify={"center"}
                 position={"relative"}
-                left={"-10px"}
+                left={"-15px"}
               >
                 <Box
                   id={`hash-${i}`}
