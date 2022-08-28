@@ -222,7 +222,7 @@ function Keyboard() {
 
     navigator.clipboard.writeText(
       `Hexle ${
-        currAttempt.attempt + 1
+        gameOver === "LOST" ? "X" : currAttempt.attempt + 1
       }/6\nhttps://hexle.netlify.app\n${finalBox}`
     );
 
