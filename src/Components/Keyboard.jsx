@@ -220,7 +220,6 @@ function Keyboard() {
       .join()
       .replaceAll(",", "\n");
 
-    console.log(finalBox);
     navigator.clipboard.writeText(
       `Hexle ${
         currAttempt.attempt + 1

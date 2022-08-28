@@ -7,7 +7,6 @@ import { correctColour } from "../const/index";
 function GridContainer() {
   const board = useRecoilValue(boardState);
   const correctHexle = correctColour;
-  console.log(correctHexle);
 
   return (
     <>
