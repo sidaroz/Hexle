@@ -76,7 +76,7 @@ function Keyboard() {
     });
   };
   const handleKeyboard = useCallback((e) => {
-    if (e.key === "ENTER") {
+    if (e.key === "ENTER" || e.key === "Enter") {
       onEnterFunc();
     } else if (e.key === "Backspace") {
       onDeleteFunc();
