@@ -13,7 +13,7 @@ import {
   Text,
   Flex,
   useColorMode,
-  useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { FiDelete } from "react-icons/fi";
 import { useRecoilState } from "recoil";
@@ -26,7 +26,7 @@ function Keyboard() {
   const [gameOver, setGameOver] = useRecoilState(gameOverState);
   const answerColour = correctColour;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { colorMode, toggleColorMode } = useColorMode();
+  const toast = useToast();
 
   const onEnterFunc = function () {
     const guess = board[currAttempt.attempt].join("");
@@ -225,6 +225,14 @@ function Keyboard() {
         currAttempt.attempt + 1
       }/6\nhttps://hexle.netlify.app\n${finalBox}`
     );
+
+    toast({
+      title: "Copied to clipboard!",
+      position: "top",
+      duration: 2000,
+      status: "success",
+      isClosable: true,
+    });
   };
   const keysRequired = [
     "A",
