@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import {
   Grid,
   Button,
-  useColorModeValue,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -13,6 +12,8 @@ import {
   useDisclosure,
   Text,
   Flex,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { FiDelete } from "react-icons/fi";
 import { useRecoilState } from "recoil";
@@ -24,8 +25,9 @@ function Keyboard() {
   const [currAttempt, setCurrAttempt] = useRecoilState(currAttemptState);
   const [gameOver, setGameOver] = useRecoilState(gameOverState);
   const answerColour = correctColour;
-  const bg = useColorModeValue("#D3D6DA", "#808384");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const bg = useColorModeValue("white", "#1A202C");
 
   const onEnterFunc = function () {
     const guess = board[currAttempt.attempt].join("");
@@ -51,7 +53,6 @@ function Keyboard() {
       return;
     }
     setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPosition: 0 });
-    // Functionality for showing colours goes in here
   };
 
   const onDeleteFunc = function () {
@@ -169,6 +170,35 @@ function Keyboard() {
     currentRowHash.classList.remove("hidden");
   }, []);
 
+  const playAgainHandler = function () {
+    // TODO Could set all states back to initial.
+    // onClose();
+    // document.body.style.backgroundColor = "#1A202C";
+    // const currentRowHash = document.querySelector(
+    //   `#hash-${currAttempt.attempt + 1}`
+    // );
+    // const initialRowHash = document.querySelector(`#hash-${0}`);
+    // currentRowHash.classList.add("hidden");
+    // initialRowHash.classList.remove("hidden");
+    // const rowTiles = document.querySelector(
+    //   `#guess__row-${currAttempt.attempt}`
+    // ).childNodes;
+    // toggleColorMode(2);
+
+    // setGameOver("");
+    // setBoard([
+    //   ["", "", "", "", "", ""],
+    //   ["", "", "", "", "", ""],
+    //   ["", "", "", "", "", ""],
+    //   ["", "", "", "", "", ""],
+    //   ["", "", "", "", "", ""],
+    //   ["", "", "", "", "", ""],
+    // ]);
+    // setCurrAttempt({ attempt: 0, letterPosition: 0 });
+
+    window.location.reload();
+  };
+
   const keysRequired = [
     "A",
     "B",
@@ -244,6 +274,7 @@ function Keyboard() {
                 bgColor={"#6AA964"}
                 color={"white"}
                 _hover={{ bgColor: "green.500" }}
+                onClick={playAgainHandler}
               >
                 Play Again
               </Button>
