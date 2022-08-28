@@ -27,7 +27,6 @@ function Keyboard() {
   const answerColour = correctColour;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue("white", "#1A202C");
 
   const onEnterFunc = function () {
     const guess = board[currAttempt.attempt].join("");
@@ -147,6 +146,7 @@ function Keyboard() {
         tile.classList.add(guess[index].colour);
         addColourToKeyBoardKey(guess[index].letter, guess[index].colour);
       }, 500 * index);
+      tile.classList.remove("flip");
     });
   };
 
@@ -162,6 +162,7 @@ function Keyboard() {
       setTimeout(() => {
         currentRowHash.classList.remove("hidden");
         previousRowHash.classList.add("hidden");
+        previousRowHash.classList.remove("fall");
       }, 200);
     }
   };
@@ -171,6 +172,7 @@ function Keyboard() {
   }, []);
 
   const playAgainHandler = function () {
+    window.location.reload();
     // TODO Could set all states back to initial.
     // onClose();
     // document.body.style.backgroundColor = "#1A202C";
@@ -180,11 +182,15 @@ function Keyboard() {
     // const initialRowHash = document.querySelector(`#hash-${0}`);
     // currentRowHash.classList.add("hidden");
     // initialRowHash.classList.remove("hidden");
-    // const rowTiles = document.querySelector(
-    //   `#guess__row-${currAttempt.attempt}`
-    // ).childNodes;
+    // for (let i = 0; i < 7; i++) {
+    //   const rowTiles = document.querySelector(`#guess__row-${i}`).childNodes;
+    //   rowTiles.forEach((tile) => {
+    //     tile.classList.remove("error");
+    //     tile.classList.remove("correct");
+    //     tile.classList.remove("almost");
+    //   });
+    // }
     // toggleColorMode(2);
-
     // setGameOver("");
     // setBoard([
     //   ["", "", "", "", "", ""],
@@ -195,10 +201,32 @@ function Keyboard() {
     //   ["", "", "", "", "", ""],
     // ]);
     // setCurrAttempt({ attempt: 0, letterPosition: 0 });
-
-    window.location.reload();
   };
 
+  const shareButtonHandler = () => {
+    const boxesToShare = [];
+    for (let i = 0; i <= currAttempt.attempt; i++) {
+      const rowTiles = document.querySelector(`#guess__row-${i}`).childNodes;
+      rowTiles.forEach((tile) => {
+        if (tile.classList.contains("correct")) boxesToShare.push("🟩");
+
+        if (tile.classList.contains("error")) boxesToShare.push("⬜️");
+        if (tile.classList.contains("almost")) boxesToShare.push("🟨");
+      });
+    }
+    const joinedBoxes = boxesToShare.join("");
+    const finalBox = joinedBoxes
+      .match(/.{1,12}/g)
+      .join()
+      .replaceAll(",", "\n");
+
+    console.log(finalBox);
+    navigator.clipboard.writeText(
+      `Hexle ${
+        currAttempt.attempt + 1
+      }/6\nhttps://hexle.netlify.app\n${finalBox}`
+    );
+  };
   const keysRequired = [
     "A",
     "B",
@@ -267,7 +295,10 @@ function Keyboard() {
           </ModalBody>
           <ModalFooter>
             <Flex margin={"0 auto"} gap={4}>
-              <Button _hover={{ bgColor: `#${correctColour}`, color: "white" }}>
+              <Button
+                _hover={{ bgColor: `#${correctColour}`, color: "white" }}
+                onClick={shareButtonHandler}
+              >
                 Share
               </Button>
               <Button
