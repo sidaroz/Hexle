@@ -76,7 +76,7 @@ function Keyboard() {
     });
   };
   const handleKeyboard = useCallback((e) => {
-    if (e.key === "Enter") {
+    if (e.key === "ENTER") {
       onEnterFunc();
     } else if (e.key === "Backspace") {
       onDeleteFunc();
@@ -98,7 +98,7 @@ function Keyboard() {
   }, [handleKeyboard]);
 
   const keyHandler = (e) => {
-    if (e.target.textContent === "Enter") {
+    if (e.target.textContent === "ENTER") {
       // If not full then return whatever needed
       onEnterFunc();
     } else if (e.target.textContent === "") {
